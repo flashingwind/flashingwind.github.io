@@ -8,3 +8,13 @@
 - 外部メディアは、ユーザー管理素材かライセンスが明確なものを優先します。
 - GitHub Pages 前提で進め、バックエンドはユーザーが求めたときだけ扱います。
 - コードを追加したら動作確認し、実装はシンプルで保守しやすく保ちます。
+
+バックエンドは Supabase を軸にする。作品登録や並べ替え、公開データは Supabase の Postgres と Storage に寄せる。
+
+構成としてはこうします。
+
+- フロント: React + Vite + GitHub Pages
+- バックエンド: Supabase
+- 画像の保存とプレビュー: Supabase Storage か Cloudinary
+- 連絡先メール: Resend か SendGrid
+- 自動公開: GitHub Actions
