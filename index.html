@@ -1,71 +1,663 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta name="generator" content=
-"HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
-<meta http-equiv="Content-Type" content=
-"text/html; charset=utf-8" />
-<title>flashingwind/flashingwind.github.com @ GitHub</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Munenori IIDA | Portfolio</title>
+    <meta name="description" content="Munenori IIDAのポートフォリオ。商用Webサイトを時系列で並べ、趣味写真も掲載するReactベースのGitHub Pagesサイト。">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        :root {
+            --bg: #f4efe7;
+            --bg-2: #efe6d8;
+            --ink: #221f1c;
+            --sub: #665d54;
+            --card: rgba(255, 255, 255, 0.88);
+            --line: rgba(73, 60, 45, 0.14);
+            --accent: #22584c;
+            --accent-2: #a85e2f;
+            --shadow: 0 18px 36px rgba(35, 28, 20, 0.14);
+            --fixed-width: 330px;
+        }
 
-<style type="text/css">
-/*<![CDATA[*/
-body {
-   margin-top: 1.0em;
-   background-color: #d5f1ec;
-font-family: "Helvetica,Arial,FreeSans";
-   color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-h1 { font-size: 3.8em; color: #2a0e13; margin-bottom: 3px; }
-h1 .small { font-size: 0.4em; }
-h1 a { text-decoration: none }
-h2 { font-size: 1.5em; color: #2a0e13; }
-    h3 { text-align: center; color: #2a0e13; }
-    a { color: #2a0e13; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-/*]]>*/
-</style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: "Avenir Next", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+            background:
+                radial-gradient(circle at 12% 8%, #fffaf0 0%, transparent 32%),
+                radial-gradient(circle at 86% 14%, #f9efe2 0%, transparent 28%),
+                linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        #root {
+            min-height: 100vh;
+        }
+
+        .page {
+            width: min(1420px, 94vw);
+            margin: 0 auto;
+            padding: 28px 0 56px;
+            display: grid;
+            grid-template-columns: var(--fixed-width) minmax(0, 1fr);
+            gap: 28px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 24px;
+            height: calc(100vh - 48px);
+            overflow: auto;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.74);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+        }
+
+        .sidebar h1 {
+            margin: 0;
+            font-size: clamp(2rem, 5vw, 3.1rem);
+            line-height: 1.02;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(34, 88, 76, 0.08);
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .lead {
+            margin: 14px 0 18px;
+            color: var(--sub);
+            font-size: 0.98rem;
+        }
+
+        .meta {
+            display: grid;
+            gap: 10px;
+            margin: 18px 0 20px;
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--line);
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--sub);
+            font-size: 0.92rem;
+        }
+
+        .meta-row strong {
+            color: var(--ink);
+        }
+
+        .link-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .link-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: #fbf8f2;
+            border: 1px solid #ded4c6;
+            transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+        }
+
+        .link-list a:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            border-color: rgba(34, 88, 76, 0.24);
+        }
+
+        .link-list span:last-child {
+            color: var(--accent);
+            font-size: 0.88rem;
+        }
+
+        .storage-note {
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(168, 94, 47, 0.08);
+            border: 1px solid rgba(168, 94, 47, 0.18);
+            color: var(--sub);
+            font-size: 0.92rem;
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .hero {
+            padding: 24px 24px 20px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 14px 28px rgba(34, 27, 20, 0.08);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .stat {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--line);
+        }
+
+        .stat .label {
+            color: var(--sub);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .stat .value {
+            margin-top: 8px;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: clamp(1.35rem, 2vw, 1.9rem);
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--sub);
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(66, 53, 37, 0.12);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 12px 12px 16px;
+            transform: rotate(var(--tilt, 0deg));
+            transition: transform 220ms ease, box-shadow 220ms ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) rotate(0deg);
+            box-shadow: 0 24px 42px rgba(35, 28, 20, 0.18);
+        }
+
+        .photo {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid rgba(65, 52, 38, 0.14);
+            background: #eee7dc;
+        }
+
+        .caption {
+            padding: 12px 4px 0;
+        }
+
+        .caption-top {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .caption h3 {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.35;
+        }
+
+        .date {
+            color: var(--accent-2);
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+
+        .caption p {
+            margin: 8px 0 0;
+            color: var(--sub);
+            font-size: 0.92rem;
+            min-height: 2.8em;
+        }
+
+        .card-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 32px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #f8f4ec;
+            border: 1px solid rgba(66, 53, 37, 0.14);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.84rem;
+        }
+
+        .foot {
+            margin: 24px 0 0;
+            color: var(--sub);
+            font-size: 0.9rem;
+        }
+
+        .hint {
+            margin-top: 12px;
+            color: var(--sub);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1120px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: auto;
+                height: auto;
+            }
+
+            .hero-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                width: min(640px, 94vw);
+                padding-top: 16px;
+            }
+
+            .hero-grid,
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-<a href=
-"http://github.com/flashingwind/flashingwind.github.com"><img style="position: absolute; top: 0; right: 0; border: 0;"
-src=
-"http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
-alt="Fork me on GitHub" /></a>
-<div id="container">
-<div class="download"><a href=
-"http://github.com/flashingwind/flashingwind.github.com/zipball/master">
-<img border="0" width="90" src=
-"http://github.com/images/modules/download/zip.png" /></a> <a href=
-"http://github.com/flashingwind/flashingwind.github.com/tarball/master">
-<img border="0" width="90" src=
-"http://github.com/images/modules/download/tar.png" /></a></div>
-<h1><a href=
-"http://github.com/flashingwind/flashingwind.github.com">flashingwind.github.com</a>
-<span class="small">by <a href=
-"http://github.com/flashingwind">flashingwind</a></span></h1>
-<div class="description"></div>
-<h2>Contact</h2>
-<p>IIDA Munenori (flashingwind@gmail.com)<br /></p>
-<h2>Download</h2>
-<p>You can download this project in either <a href=
-"http://github.com/flashingwind/flashingwind.github.com/zipball/master">
-zip</a> or <a href=
-"http://github.com/flashingwind/flashingwind.github.com/tarball/master">
-tar</a> formats.</p>
-<p>You can also clone the project with <a href=
-"http://git-scm.com">Git</a> by running:</p>
-<pre>$ git clone git://github.com/flashingwind/flashingwind.github.com</pre>
-<div class="footer">get the source code on GitHub : <a href=
-"http://github.com/flashingwind/flashingwind.github.com">flashingwind/flashingwind.github.com</a></div>
-</div>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useMemo } = React;
+
+        const siteLinks = [
+            { label: 'GitHub', href: 'https://github.com/flashingwind', note: 'profile' },
+            { label: 'Repository', href: 'https://github.com/flashingwind/flashingwind.github.com', note: 'site source' },
+            { label: 'Email', href: 'mailto:flashingwind@gmail.com', note: 'contact' },
+        ];
+
+        function makePlaceholder(title, date, from = '#22584c', to = '#a85e2f') {
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+                    <title>${title}</title>
+                    <desc>${date}</desc>
+                    <defs>
+                        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="${from}" />
+                            <stop offset="100%" stop-color="${to}" />
+                        </linearGradient>
+                        <radialGradient id="r" cx="30%" cy="20%" r="80%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42" />
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+                    <rect width="1200" height="900" fill="url(#g)" />
+                    <circle cx="220" cy="180" r="220" fill="url(#r)" />
+                    <path d="M0 620 C180 520, 300 720, 500 640 S860 500, 1200 650 V900 H0 Z" fill="rgba(255,255,255,0.18)" />
+                    <path d="M0 700 C200 610, 390 820, 600 720 S940 620, 1200 730 V900 H0 Z" fill="rgba(0,0,0,0.12)" />
+                    <text x="64" y="124" fill="rgba(255,255,255,0.9)" font-family="Avenir Next, Hiragino Kaku Gothic ProN, Yu Gothic, sans-serif" font-size="58" font-weight="700">${title}</text>
+                    <text x="64" y="178" fill="rgba(255,255,255,0.82)" font-family="Avenir Next, Hiragino Kaku Gothic ProN, Yu Gothic, sans-serif" font-size="28">${date}</text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+        }
+
+        const workItems = [
+            {
+                title: 'Brand Concept',
+                date: '2026-04',
+                kind: 'Commercial',
+                description: 'ブランドサイト / 世界観に合わせた構成。',
+                image: makePlaceholder('Brand Concept', '2026-04', '#22584c', '#4f8f7f'),
+                alt: 'Brand concept website',
+                link: 'https://example.com/brand-concept',
+                tilt: -1.1,
+            },
+            {
+                title: 'Analytics UX',
+                date: '2026-03',
+                kind: 'Commercial',
+                description: 'データ活用UI / 可視化と体験改善。',
+                image: makePlaceholder('Analytics UX', '2026-03', '#4b5f8f', '#79a6d2'),
+                alt: 'Analytics focused website',
+                link: 'https://example.com/analytics-ux',
+                tilt: 1.2,
+            },
+            {
+                title: 'Recruit Site',
+                date: '2026-02',
+                kind: 'Commercial',
+                description: '採用向け特設サイト / 導線改善。',
+                image: makePlaceholder('Recruit Site', '2026-02', '#934f7a', '#d3a05e'),
+                alt: 'Recruitment campaign site',
+                link: 'https://example.com/recruit-site',
+                tilt: -0.8,
+            },
+            {
+                title: 'EC Promotion',
+                date: '2025-12',
+                kind: 'Commercial',
+                description: '商品ページ最適化 / クリック率改善。',
+                image: makePlaceholder('EC Promotion', '2025-12', '#9b6f2d', '#d9b46f'),
+                alt: 'Ecommerce web design',
+                link: 'https://example.com/ec-promotion',
+                tilt: 0.9,
+            },
+            {
+                title: 'Admin Dashboard',
+                date: '2025-10',
+                kind: 'Commercial',
+                description: 'B2B管理画面 / UI設計と実装支援。',
+                image: makePlaceholder('Admin Dashboard', '2025-10', '#354b5e', '#7f9eb2'),
+                alt: 'Dashboard and admin UI',
+                link: 'https://example.com/admin-dashboard',
+                tilt: -1.4,
+            },
+            {
+                title: 'Corporate Site',
+                date: '2025-08',
+                kind: 'Commercial',
+                description: 'コーポレートLP / デザインとフロント実装。',
+                image: makePlaceholder('Corporate Site', '2025-08', '#6b4d3f', '#d29b7e'),
+                alt: 'Corporate landing page design',
+                link: 'https://example.com/corporate-site',
+                tilt: 1.4,
+            },
+        ];
+
+        const photoItems = [
+            {
+                title: 'First Light',
+                date: '2026-04',
+                description: '空の色が切り替わる瞬間。',
+                image: makePlaceholder('First Light', '2026-04', '#67508c', '#a9b4de'),
+                alt: 'Sunrise over mountain',
+                source: 'GitHub Releases or storage',
+                tilt: -1.2,
+            },
+            {
+                title: 'Wide Field',
+                date: '2026-03',
+                description: '風の通り道を見た日。',
+                image: makePlaceholder('Wide Field', '2026-03', '#25736a', '#80c3a8'),
+                alt: 'Open field and cloud texture',
+                source: 'GitHub Pages assets',
+                tilt: 0.8,
+            },
+            {
+                title: 'Forest Path',
+                date: '2026-02',
+                description: '木漏れ日の層を辿る散歩道。',
+                image: makePlaceholder('Forest Path', '2026-02', '#2d6a4f', '#95c59c'),
+                alt: 'Forest path in green season',
+                source: 'GitHub Repository',
+                tilt: -0.9,
+            },
+            {
+                title: 'Quiet Lake',
+                date: '2025-12',
+                description: '水面の反射が静かな朝。',
+                image: makePlaceholder('Quiet Lake', '2025-12', '#335d7e', '#8db7d9'),
+                alt: 'Lake reflection landscape',
+                source: 'Cloud storage',
+                tilt: 1.1,
+            },
+            {
+                title: 'Morning Ridge',
+                date: '2025-10',
+                description: '山の輪郭が見え始める時間。',
+                image: makePlaceholder('Morning Ridge', '2025-10', '#72503b', '#be9771'),
+                alt: 'Mountain range with mist',
+                source: 'GitHub Releases or storage',
+                tilt: -1.3,
+            },
+            {
+                title: 'Evening Walk',
+                date: '2025-08',
+                description: '夕暮れの路地で拾った光。',
+                image: makePlaceholder('Evening Walk', '2025-08', '#8b4c3b', '#d28d6d'),
+                alt: 'Street photography at dusk',
+                source: 'GitHub Pages assets',
+                tilt: 1.2,
+            },
+        ];
+
+        function formatDate(dateValue) {
+            const [year, month] = dateValue.split('-');
+            return `${year}.${month}`;
+        }
+
+        function App() {
+            const sortedWorks = useMemo(() => {
+                return [...workItems].sort((left, right) => right.date.localeCompare(left.date));
+            }, []);
+
+            const sortedPhotos = useMemo(() => {
+                return [...photoItems].sort((left, right) => right.date.localeCompare(left.date));
+            }, []);
+
+            return (
+                <div className="page">
+                    <aside className="sidebar">
+                        <div className="eyebrow">Portfolio / GitHub Pages</div>
+                        <h1>Munenori IIDA</h1>
+                        <p className="lead">
+                            商用Webサイト制作を中心に、作例を時系列で自動整列するポートフォリオです。
+                            趣味写真はライセンス管理しやすい保存先を前提に分けて扱います。
+                        </p>
+
+                        <div className="meta">
+                            <div className="meta-row">
+                                <span>Focus</span>
+                                <strong>Commercial Web</strong>
+                            </div>
+                            <div className="meta-row">
+                                <span>Layout</span>
+                                <strong>Fixed sidebar</strong>
+                            </div>
+                            <div className="meta-row">
+                                <span>Sort</span>
+                                <strong>Newest first</strong>
+                            </div>
+                        </div>
+
+                        <nav className="link-list" aria-label="External Links">
+                            {siteLinks.map((item) => (
+                                <a href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noreferrer' : undefined} key={item.label}>
+                                    <span>{item.label}</span>
+                                    <span>{item.note}</span>
+                                </a>
+                            ))}
+                        </nav>
+
+                        <div className="storage-note">
+                            写真の保存先候補は、GitHub Repository の assets、GitHub Releases、Cloudinary、Supabase Storage などの「自分でアップロードした素材だけを置ける場所」に寄せると管理しやすいです。
+                        </div>
+
+                        <p className="hint">
+                            作品カードは <strong>date</strong> を差し替えるだけで自動的に時系列で並び替わります。
+                        </p>
+                    </aside>
+
+                    <main className="content">
+                        <section className="hero">
+                            <div className="section-head">
+                                <div>
+                                    <h2>Commercial Works</h2>
+                                    <p>商売のメインとなるWeb制作の作例を、最新順で自動表示。</p>
+                                </div>
+                                <p>GitHub上のデータだけを更新すれば並び順が変わります。</p>
+                            </div>
+
+                            <div className="hero-grid">
+                                <div className="stat">
+                                    <div className="label">Works</div>
+                                    <div className="value">{sortedWorks.length} cases</div>
+                                </div>
+                                <div className="stat">
+                                    <div className="label">Photos</div>
+                                    <div className="value">{sortedPhotos.length} shots</div>
+                                </div>
+                                <div className="stat">
+                                    <div className="label">Platform</div>
+                                    <div className="value">GitHub Pages</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="section" id="works">
+                            <div className="section-head">
+                                <div>
+                                    <h2>Works Timeline</h2>
+                                    <p>時系列で並ぶWebサイト作品。</p>
+                                </div>
+                                <p>掲載順は date の降順です。</p>
+                            </div>
+
+                            <div className="grid">
+                                {sortedWorks.map((item) => (
+                                    <article className="card" style={{ '--tilt': `${item.tilt}deg` }} key={item.title}>
+                                        <img className="photo" src={item.image} alt={item.alt} loading="lazy" />
+                                        <div className="caption">
+                                            <div className="caption-top">
+                                                <h3>{item.title}</h3>
+                                                <span className="date">{formatDate(item.date)}</span>
+                                            </div>
+                                            <p>{item.description}</p>
+                                            <div className="card-links">
+                                                <span className="pill">{item.kind}</span>
+                                                <a className="pill" href={item.link} target="_blank" rel="noreferrer">Live</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+
+                        <section className="section" id="photos">
+                            <div className="section-head">
+                                <div>
+                                    <h2>Photo Album</h2>
+                                    <p>趣味写真は、サービスやストレージを変えても差し替えやすい構造。</p>
+                                </div>
+                                <p>写真も date ベースで並び替え。</p>
+                            </div>
+
+                            <div className="grid">
+                                {sortedPhotos.map((item) => (
+                                    <article className="card" style={{ '--tilt': `${item.tilt}deg` }} key={item.title}>
+                                        <img className="photo" src={item.image} alt={item.alt} loading="lazy" />
+                                        <div className="caption">
+                                            <div className="caption-top">
+                                                <h3>{item.title}</h3>
+                                                <span className="date">{formatDate(item.date)}</span>
+                                            </div>
+                                            <p>{item.description}</p>
+                                            <div className="card-links">
+                                                <span className="pill">{item.source}</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+
+                        <p className="foot">© 2026 Munenori IIDA</p>
+                    </main>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
 </body>
 </html>
