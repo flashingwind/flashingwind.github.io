@@ -3,5 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   base: '/flashingwind.github.com/',
+  envPrefix: ['VITE_', 'NEXT_PUBLIC_'],
   plugins: [react()],
 });

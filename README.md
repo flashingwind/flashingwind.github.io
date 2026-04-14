@@ -20,8 +20,8 @@ npm run build
 1. GitHub Pages の Source を GitHub Actions に設定します。
 2. Supabase で `supabase/migrations/001_init.sql` を実行します。
 3. `.env.example` を参考に、ローカル環境に `.env` を作成します。
-4. `VITE_SUPABASE_URL` と `VITE_SUPABASE_ANON_KEY` を設定します。
-5. `VITE_SUPABASE_BUCKET` は必要なら変更します。
+4. `NEXT_PUBLIC_SUPABASE_URL` と `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` を設定します。Vite 形式を使う場合は `VITE_SUPABASE_URL` と `VITE_SUPABASE_ANON_KEY` でも動きます。
+5. `NEXT_PUBLIC_SUPABASE_BUCKET` か `VITE_SUPABASE_BUCKET` は必要なら変更します。
 6. `master` へ push すると GitHub Actions が `dist` を公開します。
 
 ## 使う主なサービス

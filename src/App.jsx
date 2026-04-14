@@ -395,7 +395,12 @@ function App() {
           <div className="works-grid">
             {sortedWorks.map((work, index) => (
               <article className="work-card" key={work.id} style={{ '--tilt': `${index % 2 === 0 ? -1.2 : 0.9}deg` }}>
-                <img className="work-thumb" src={work.thumbnailUrl} alt={work.title} loading="lazy" />
+                <img
+                  className="work-thumb"
+                  src={work.thumbnailUrl || createGeneratedPlaceholder(work.title, work.publishedAt)}
+                  alt={work.title}
+                  loading="lazy"
+                />
                 <div className="work-body">
                   <div className="work-meta">
                     <strong>{work.title}</strong>
