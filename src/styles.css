@@ -52,6 +52,27 @@ button {
   gap: 28px;
 }
 
+.page-shell-public {
+  width: min(1200px, 94vw);
+  margin: 0 auto;
+  padding: 28px 0 56px;
+}
+
+.public-header {
+  border-radius: 24px;
+  border: 1px solid rgba(73, 60, 45, 0.14);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 14px 28px rgba(34, 27, 20, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.public-header h1 {
+  margin-top: 14px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+}
+
 .sidebar {
   position: sticky;
   top: 24px;
