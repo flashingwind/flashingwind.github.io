@@ -83,14 +83,6 @@ function WorksPage() {
         </header>
 
         <section className="panel">
-          <div className="panel-head">
-            <div>
-              <p className="section-label">作品一覧</p>
-              <h2>新しい順に並べた公開データ。</h2>
-            </div>
-            <p className="panel-note">並び順は publishedAt による自動整列です。</p>
-          </div>
-
           <div className="works-grid">
             {sortedWorks.map((work, index) => (
               <article className="work-card" key={work.id} style={{ '--tilt': `${index % 2 === 0 ? -1.2 : 0.9}deg` }}>
