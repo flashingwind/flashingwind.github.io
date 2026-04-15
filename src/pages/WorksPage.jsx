@@ -67,10 +67,6 @@ function WorksPage() {
       <main className="content">
         <header className="public-header">
           <div className="eyebrow">Munenori IIDA / Portfolio</div>
-          <h1>作品一覧</h1>
-          <p className="lead">
-            Supabase を軸に、作品登録・プレビュー・アップロード・並べ替えをまとめたポートフォリオの実装です。
-          </p>
 
           <nav className="social-row" aria-label="連絡先">
             {socialLinks.map((link) => (
@@ -84,10 +80,6 @@ function WorksPage() {
               </a>
             ))}
           </nav>
-
-          <div className="status-box subtle">
-            <p>{loading ? '読み込み中です...' : status}</p>
-          </div>
         </header>
 
         <section className="panel">
