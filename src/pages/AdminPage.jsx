@@ -37,6 +37,7 @@ function AdminPage() {
       if (!hasSupabase) {
         if (!cancelled) {
           setIsAuth(false);
+          setIsAdminUser(false);
           setLoading(false);
         }
         return;
@@ -45,28 +46,34 @@ function AdminPage() {
       if (!cancelled) {
         setUser(u);
         setIsAuth(!!u);
-        setIsAdminUser(isAdmin());
+        setIsAdminUser(!!u && u.user_metadata?.user_name === 'flashingwind');
+        setLoading(false);
+
+        if (u && u.user_metadata?.user_name !== 'flashingwind') {
+          setStatus('このアカウントでは編集権限がありません。');
+        }
       }
     }
 
     checkAuth();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (cancelled) return;
-      const u = session?.user ?? null;
-      setUser(u);
-      setIsAuth(!!u);
-      setIsAdminUser(!!u && u.user_metadata?.user_name === 'flashingwind');
+    if (hasSupabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+        if (cancelled) return;
+        const u = session?.user ?? null;
+        setUser(u);
+        setIsAuth(!!u);
+        setIsAdminUser(!!u && u.user_metadata?.user_name === 'flashingwind');
+        setLoading(false);
 
-      if (u && u.user_metadata?.user_name !== 'flashingwind') {
-        setStatus('このアカウントでは編集権限がありません。');
-      }
-    });
+        if (u && u.user_metadata?.user_name !== 'flashingwind') {
+          setStatus('このアカウントでは編集権限がありません。');
+        }
+      });
+      return () => { cancelled = true; subscription.unsubscribe(); };
+    }
 
-    return () => {
-      cancelled = true;
-      subscription.unsubscribe();
-    };
+    return () => { cancelled = true; };
   }, []);
 
   useEffect(() => {
