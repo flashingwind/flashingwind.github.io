@@ -153,6 +153,30 @@ button {
   color: #221f1c;
 }
 
+.social-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-row a {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(73, 60, 45, 0.14);
+  background: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #22584c;
+}
+
+.social-row a:hover {
+  background: #22584c;
+  color: #fff;
+}
+
 .link-list {
   display: grid;
   gap: 10px;

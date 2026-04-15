@@ -72,7 +72,7 @@ function WorksPage() {
             Supabase を軸に、作品登録・プレビュー・アップロード・並べ替えをまとめたポートフォリオの実装です。
           </p>
 
-          <nav className="link-list" aria-label="連絡先">
+          <nav className="social-row" aria-label="連絡先">
             {socialLinks.map((link) => (
               <a
                 key={link.label}
@@ -80,8 +80,7 @@ function WorksPage() {
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
               >
-                <span>{link.label}</span>
-                <span>{link.note}</span>
+                {link.label}
               </a>
             ))}
           </nav>
