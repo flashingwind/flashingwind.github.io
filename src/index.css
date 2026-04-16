@@ -45,3 +45,67 @@ section:first-of-type { padding-top: calc(56px + 24px); }
 
 footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; }
 .footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ── Login ── */
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+.login-card { width: 100%; max-width: 400px; border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; background: var(--card-bg); }
+.login-title { font-size: 18px; font-weight: 600; margin-bottom: 1.5rem; }
+.btn-github { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg2); color: var(--text); font-size: 14px; cursor: pointer; transition: background 0.15s; }
+.btn-github:hover { background: var(--border); }
+.login-divider { display: flex; align-items: center; gap: 12px; margin: 1.25rem 0; color: var(--muted); font-size: 12px; }
+.login-divider::before, .login-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.login-form { display: flex; flex-direction: column; gap: 1rem; }
+.login-form label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--muted); }
+.login-form input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font-size: 14px; }
+.login-form input:focus { outline: 2px solid var(--text); outline-offset: -1px; }
+.login-error { font-size: 13px; color: #e55; }
+.btn-primary { padding: 9px 18px; background: var(--text); color: var(--bg); border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { padding: 9px 18px; background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-size: 14px; cursor: pointer; transition: border-color 0.15s; }
+.btn-secondary:hover { border-color: var(--text); }
+.btn-danger { padding: 9px 18px; background: transparent; color: #e55; border: 1px solid #e55; border-radius: 6px; font-size: 14px; cursor: pointer; transition: background 0.15s; }
+.btn-danger:hover { background: rgba(238,85,85,.08); }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-logout { padding: 6px 14px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; cursor: pointer; }
+.btn-logout:hover { color: var(--text); border-color: var(--text); }
+
+/* ── Admin layout ── */
+.admin-loading { padding: 4rem; text-align: center; color: var(--muted); }
+.admin-wrap { min-height: 100vh; background: var(--bg); }
+.admin-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 2rem; padding: 0 2rem; height: 56px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.admin-nav-logo { font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
+.admin-nav-links { display: flex; gap: 2rem; flex: 1; }
+.admin-nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.admin-nav-links a:hover { color: var(--text); }
+.admin-main { max-width: 960px; margin: 0 auto; padding: 2rem; }
+.admin-section {}
+.admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.admin-title { font-size: 18px; font-weight: 600; }
+.admin-hint { color: var(--muted); font-size: 14px; }
+
+/* ── Admin table ── */
+.admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.admin-table th { text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); padding: 8px 12px; }
+.admin-table td { border-bottom: 1px solid var(--border); padding: 12px; vertical-align: middle; }
+.admin-thumb { width: 72px; height: 40px; object-fit: cover; border-radius: 4px; display: block; }
+.admin-thumb-empty { background: var(--bg2); border-radius: 4px; }
+.admin-td-title { font-weight: 500; max-width: 240px; }
+.admin-td-date { white-space: nowrap; color: var(--muted); font-size: 12px; }
+.admin-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.admin-actions { display: flex; gap: 8px; }
+
+/* ── Work form ── */
+.work-form { max-width: 640px; }
+.form-title { font-size: 18px; font-weight: 600; margin-bottom: 1.5rem; }
+.form-label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+.required { color: #e55; }
+.form-input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font-size: 14px; font-family: inherit; }
+.form-input:focus { outline: 2px solid var(--text); outline-offset: -1px; }
+.form-textarea { resize: vertical; }
+.form-input-file { font-size: 13px; }
+.form-hint { font-size: 12px; color: var(--muted); }
+.form-error { font-size: 13px; color: #e55; margin-bottom: .5rem; }
+.form-actions { display: flex; gap: 10px; margin-top: 1.5rem; }
+.thumb-upload-area { display: flex; flex-direction: column; gap: 8px; margin-bottom: 6px; }
+.thumb-preview { width: 160px; height: 90px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }

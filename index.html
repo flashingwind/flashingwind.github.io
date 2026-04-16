@@ -5,6 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>flashingwind.github.com</title>
+    <!-- GitHub Pages SPA: 404.html から転送されたパスを復元して React Router に渡す -->
+    <script>
+      (function() {
+        var p = window.location.search.slice(1).split('&').reduce(function(acc, s) {
+          var r = s.split('='); acc[r[0]] = r.slice(1).join('='); return acc;
+        }, {});
+        if (p.p !== undefined) {
+          window.history.replaceState(
+            null, null,
+            '/' + decodeURIComponent(p.p) + (p.h ? '#' + decodeURIComponent(p.h) : '')
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -4,4 +4,6 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // GitHub Pages: リポジトリ名がサブパスになる場合は base を設定
+  // base: '/flashingwind.github.com/',
 })
