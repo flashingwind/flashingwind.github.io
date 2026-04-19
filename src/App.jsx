@@ -43,6 +43,7 @@ export default function App() {
     supabase
       .from('works')
       .select('*')
+      .eq('published', true)
       .order('published_at', { ascending: false })
       .then(({ data }) => { if (data) setWorks(data) })
   }, [])

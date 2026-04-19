@@ -30,6 +30,15 @@ export default function AdminWorks() {
     setWorks(ws => ws.filter(w => w.id !== id))
   }
 
+  async function handleTogglePublish(w) {
+    const { error } = await supabase
+      .from('works')
+      .update({ published: !w.published })
+      .eq('id', w.id)
+    if (error) { setError(error.message); return }
+    setWorks(ws => ws.map(x => x.id === w.id ? { ...x, published: !w.published } : x))
+  }
+
   function handleSave(saved) {
     if (mode === 'add') {
       setWorks(ws => [saved, ...ws])
@@ -72,12 +81,13 @@ export default function AdminWorks() {
               <th>タイトル</th>
               <th>タグ</th>
               <th>公開日</th>
+              <th>公開</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
             {works.map(w => (
-              <tr key={w.id}>
+              <tr key={w.id} className={w.published ? '' : 'admin-row-draft'}>
                 <td>
                   {w.thumbnail_url
                     ? <img className="admin-thumb" src={w.thumbnail_url} alt="" />
@@ -92,6 +102,14 @@ export default function AdminWorks() {
                   </div>
                 </td>
                 <td className="admin-td-date">{w.published_at?.slice(0, 10) ?? '—'}</td>
+                <td>
+                  <button
+                    className={w.published ? 'btn-publish-on btn-sm' : 'btn-publish-off btn-sm'}
+                    onClick={() => handleTogglePublish(w)}
+                  >
+                    {w.published ? '公開中' : '下書き'}
+                  </button>
+                </td>
                 <td>
                   <div className="admin-actions">
                     <button
