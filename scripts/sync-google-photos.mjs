@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
+console.log('Script started')
+console.log('All env keys:', Object.keys(process.env).filter(k => k.includes('SUPABASE') || k.includes('GOOGLE')))
+
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
