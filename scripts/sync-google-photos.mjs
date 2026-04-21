@@ -1,14 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN
 const BUCKET = process.env.VITE_SUPABASE_BUCKET || 'portfolio-assets'
 const SYNC_COUNT = 3
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 async function getAccessToken() {
   const res = await fetch('https://oauth2.googleapis.com/token', {
