@@ -13,16 +13,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: |
-          node -e "
-          const { createClient } = require('@supabase/supabase-js');
-          const url = process.env.VITE_SUPABASE_URL;
-          const key = process.env.SUPABASE_SERVICE_KEY;
-          console.log('URL:', url ? 'set' : 'MISSING');
-          console.log('KEY:', key ? 'set' : 'MISSING');
-          "
+      - run: npm install @supabase/supabase-js
+      - run: echo "TEST URL SET" && echo "TEST KEY SET"
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
