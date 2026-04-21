@@ -8,6 +8,18 @@ const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN
 const BUCKET = process.env.VITE_SUPABASE_BUCKET || 'portfolio-assets'
 const SYNC_COUNT = 3
 
+console.log('Environment check:')
+console.log('VITE_SUPABASE_URL:', SUPABASE_URL ? '✓' : '✗')
+console.log('SUPABASE_SERVICE_KEY:', SUPABASE_KEY ? '✓' : '✗')
+console.log('GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID ? '✓' : '✗')
+console.log('GOOGLE_CLIENT_SECRET:', GOOGLE_CLIENT_SECRET ? '✓' : '✗')
+console.log('GOOGLE_REFRESH_TOKEN:', GOOGLE_REFRESH_TOKEN ? '✓' : '✗')
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('Missing Supabase credentials')
+  process.exit(1)
+}
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 async function getAccessToken() {
