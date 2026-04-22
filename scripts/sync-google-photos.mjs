@@ -55,15 +55,17 @@ async function fetchDrivePhotos(accessToken) {
 function parseExif(meta) {
   if (!meta) return ''
   const lines = []
-  if (meta.time) lines.push(`撮影日時: ${meta.time}`)
-  if (meta.cameraMake) lines.push(`カメラ: ${meta.cameraMake} ${meta.cameraModel || ''}`.trim())
-  if (meta.focalLength) lines.push(`焦点距離: ${meta.focalLength}mm`)
-  if (meta.aperture) lines.push(`f/${meta.aperture}`)
+  if (meta.time) lines.push(meta.time)
+  if (meta.cameraMake) lines.push(`${meta.cameraMake} ${meta.cameraModel || ''}`.trim())
+  const specs = []
+  if (meta.focalLength) specs.push(`${meta.focalLength}mm`)
+  if (meta.aperture) specs.push(`f/${meta.aperture}`)
   if (meta.exposureTime) {
     const ss = meta.exposureTime < 1 ? `1/${Math.round(1 / meta.exposureTime)}` : `${meta.exposureTime}`
-    lines.push(`${ss}s`)
+    specs.push(`${ss}s`)
   }
-  if (meta.isoSpeed) lines.push(`ISO${meta.isoSpeed}`)
+  if (meta.isoSpeed) specs.push(`ISO${meta.isoSpeed}`)
+  if (specs.length) lines.push(specs.join(' '))
   return lines.join('\n')
 }
 
