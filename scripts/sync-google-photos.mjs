@@ -7,7 +7,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN
 const BUCKET = process.env.VITE_SUPABASE_BUCKET || 'portfolio-assets'
 const DRIVE_FOLDER_ID = '1o7uFoVAIPvGgU9Bq7bLLmn_rBbiy249-'
-const SYNC_COUNT = 3
+const SYNC_COUNT = 12
 
 console.log('Environment check:')
 console.log('VITE_SUPABASE_URL:', SUPABASE_URL ? '✓' : '✗')
