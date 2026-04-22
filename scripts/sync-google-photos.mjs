@@ -1,14 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
-console.log('Script started')
-console.log('All env keys:', Object.keys(process.env).filter(k => k.includes('SUPABASE') || k.includes('GOOGLE')))
-
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN
 const BUCKET = process.env.VITE_SUPABASE_BUCKET || 'portfolio-assets'
+const DRIVE_FOLDER_ID = '1o7uFoVAIPvGgU9Bq7bLLmn_rBbiy249-'
 const SYNC_COUNT = 3
 
 console.log('Environment check:')
@@ -41,46 +39,45 @@ async function getAccessToken() {
   return data.access_token
 }
 
-async function fetchRecentPhotos(accessToken) {
+async function fetchDrivePhotos(accessToken) {
+  const query = encodeURIComponent(
+    `'${DRIVE_FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`
+  )
   const res = await fetch(
-    `https://photoslibrary.googleapis.com/v1/mediaItems?pageSize=${SYNC_COUNT}`,
+    `https://www.googleapis.com/drive/v3/files?q=${query}&pageSize=${SYNC_COUNT}&orderBy=createdTime desc&fields=files(id,name,mimeType,createdTime,imageMediaMetadata)`,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   )
   const data = await res.json()
-  if (!data.mediaItems) throw new Error(`Photos error: ${JSON.stringify(data)}`)
-  // 画像のみ
-  return data.mediaItems.filter(item => item.mimeType?.startsWith('image/'))
+  if (data.error) throw new Error(`Drive error: ${JSON.stringify(data.error)}`)
+  return data.files || []
 }
 
-function parseExif(mediaMetadata) {
-  const photo = mediaMetadata?.photo || {}
+function parseExif(meta) {
+  if (!meta) return ''
   const lines = []
-  if (mediaMetadata?.creationTime) {
-    const d = new Date(mediaMetadata.creationTime)
-    lines.push(`撮影日時: ${d.toLocaleString('ja-JP')}`)
-  }
-  if (photo.cameraMake)  lines.push(`カメラ: ${photo.cameraMake} ${photo.cameraModel || ''}`.trim())
-  if (photo.focalLength) lines.push(`焦点距離: ${photo.focalLength}mm`)
-  if (photo.apertureFNumber) lines.push(`F値: f/${photo.apertureFNumber}`)
-  if (photo.exposureTime) lines.push(`SS: ${photo.exposureTime}s`)
-  if (photo.isoEquivalent) lines.push(`ISO: ${photo.isoEquivalent}`)
+  if (meta.time) lines.push(`撮影日時: ${meta.time}`)
+  if (meta.cameraMake) lines.push(`カメラ: ${meta.cameraMake} ${meta.cameraModel || ''}`.trim())
+  if (meta.focalLength) lines.push(`焦点距離: ${meta.focalLength}mm`)
+  if (meta.aperture) lines.push(`F値: f/${meta.aperture}`)
+  if (meta.exposureTime) lines.push(`SS: ${meta.exposureTime}s`)
+  if (meta.isoSpeed) lines.push(`ISO: ${meta.isoSpeed}`)
   return lines.join('\n')
 }
 
-async function uploadToSupabase(accessToken, item) {
-  // Google Photos の画像バイナリを取得（=d でオリジナルサイズ）
-  const imageRes = await fetch(`${item.baseUrl}=d`, {
-    headers: { Authorization: `Bearer ${accessToken}` },
-  })
-  if (!imageRes.ok) throw new Error(`Image fetch failed: ${imageRes.status}`)
-  const buffer = await imageRes.arrayBuffer()
+async function uploadToSupabase(accessToken, file) {
+  const res = await fetch(
+    `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  )
+  if (!res.ok) throw new Error(`Drive download failed: ${res.status}`)
+  const buffer = await res.arrayBuffer()
 
-  const ext = item.mimeType === 'image/png' ? 'png' : 'jpg'
-  const path = `google-photos/${item.id}.${ext}`
+  const ext = file.mimeType === 'image/png' ? 'png' : 'jpg'
+  const path = `google-photos/${file.id}.${ext}`
 
   const { error } = await supabase.storage
     .from(BUCKET)
-    .upload(path, buffer, { contentType: item.mimeType, upsert: true })
+    .upload(path, buffer, { contentType: file.mimeType, upsert: true })
   if (error) throw error
 
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(path)
@@ -88,10 +85,15 @@ async function uploadToSupabase(accessToken, item) {
 }
 
 async function main() {
-  console.log('Google Photos から写真を取得中...')
+  console.log('Google Drive から写真を取得中...')
   const accessToken = await getAccessToken()
-  const photos = await fetchRecentPhotos(accessToken)
-  console.log(`${photos.slice(0, SYNC_COUNT).length} 枚取得`)
+  const files = await fetchDrivePhotos(accessToken)
+  console.log(`${files.length} 枚取得`)
+
+  if (files.length === 0) {
+    console.log('新しい写真なし')
+    return
+  }
 
   // 既存の google-photos 由来の works を削除
   const { error: delError } = await supabase
@@ -100,28 +102,27 @@ async function main() {
     .eq('source', 'google-photos')
   if (delError) throw delError
 
-  // 新しく登録
-  for (const item of photos.slice(0, SYNC_COUNT)) {
-    console.log(`処理中: ${item.filename}`)
-    const thumbnailUrl = await uploadToSupabase(accessToken, item)
-    const description = parseExif(item.mediaMetadata)
-    const publishedAt = item.mediaMetadata?.creationTime
-      ? new Date(item.mediaMetadata.creationTime).toISOString().slice(0, 10)
+  for (const file of files) {
+    console.log(`処理中: ${file.name}`)
+    const thumbnailUrl = await uploadToSupabase(accessToken, file)
+    const description = parseExif(file.imageMediaMetadata)
+    const publishedAt = file.createdTime
+      ? new Date(file.createdTime).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10)
 
     const { error } = await supabase.from('works').insert({
-      title: item.filename.replace(/\.[^.]+$/, ''),
+      title: file.name.replace(/\.[^.]+$/, ''),
       description,
       thumbnail_url: thumbnailUrl,
-      original_url: `${item.baseUrl}=d`,
+      original_url: thumbnailUrl,
       tags: ['Photography'],
       urls: [],
       published_at: publishedAt,
       source: 'google-photos',
-      published: false,  // 管理画面で承認後に公開
+      published: false,
     })
     if (error) throw error
-    console.log(`登録完了: ${item.filename}`)
+    console.log(`登録完了: ${file.name}`)
   }
 
   console.log('同期完了')
