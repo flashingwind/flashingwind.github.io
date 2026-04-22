@@ -58,9 +58,12 @@ function parseExif(meta) {
   if (meta.time) lines.push(`撮影日時: ${meta.time}`)
   if (meta.cameraMake) lines.push(`カメラ: ${meta.cameraMake} ${meta.cameraModel || ''}`.trim())
   if (meta.focalLength) lines.push(`焦点距離: ${meta.focalLength}mm`)
-  if (meta.aperture) lines.push(`F値: f/${meta.aperture}`)
-  if (meta.exposureTime) lines.push(`SS: ${meta.exposureTime}s`)
-  if (meta.isoSpeed) lines.push(`ISO: ${meta.isoSpeed}`)
+  if (meta.aperture) lines.push(`f/${meta.aperture}`)
+  if (meta.exposureTime) {
+    const ss = meta.exposureTime < 1 ? `1/${Math.round(1 / meta.exposureTime)}` : `${meta.exposureTime}`
+    lines.push(`${ss}s`)
+  }
+  if (meta.isoSpeed) lines.push(`ISO${meta.isoSpeed}`)
   return lines.join('\n')
 }
 
