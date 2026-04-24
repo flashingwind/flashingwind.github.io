@@ -15,7 +15,7 @@ export default function TweetForm({ onSave, onCancel }) {
       const tweetId = url.match(/status\/(\d+)/)?.[1]
       if (!tweetId) throw new Error('URLからツイートIDを取得できませんでした')
 
-      const title = new Date().toISOString().slice(0, 7)
+      const title = ''
 
       const result = await supabase.from('works').insert({
         title,

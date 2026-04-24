@@ -90,7 +90,7 @@ export default function WorkCard({ work }) {
             {(tags || []).map(t => <span key={t} className="work-tag">{t}</span>)}
           </div>
         </div>
-        <div className="work-title">{title}</div>
+        {title && <div className="work-title">{title}</div>}
         {description && !tweet_url && (
           <pre className="work-desc work-exif">{description}</pre>
         )}
