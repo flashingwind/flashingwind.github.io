@@ -15,14 +15,7 @@ export default function TweetForm({ onSave, onCancel }) {
       const tweetId = url.match(/status\/(\d+)/)?.[1]
       if (!tweetId) throw new Error('URLからツイートIDを取得できませんでした')
 
-      // oEmbed でタイトル（テキスト）を取得
-      const oembedRes = await fetch(
-        `https://publish.twitter.com/oembed?url=${encodeURIComponent(url)}&omit_script=true`
-      )
-      const oembed = await oembedRes.json()
-      const title = oembed.author_name
-        ? `@${oembed.author_name.replace(/^@/, '')}`
-        : `Tweet ${tweetId}`
+      const title = new Date().toISOString().slice(0, 7)
 
       const result = await supabase.from('works').insert({
         title,
