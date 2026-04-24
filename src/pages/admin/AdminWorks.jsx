@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import WorkForm from '../../components/WorkForm'
+import TweetForm from '../../components/TweetForm'
 
 export default function AdminWorks() {
   const [works, setWorks] = useState([])
@@ -48,6 +49,14 @@ export default function AdminWorks() {
     setMode(null)
   }
 
+  if (mode === 'tweet') {
+    return (
+      <div className="admin-section">
+        <TweetForm onSave={handleSave} onCancel={() => setMode(null)} />
+      </div>
+    )
+  }
+
   if (mode === 'add' || (mode && mode.edit)) {
     return (
       <div className="admin-section">
@@ -64,7 +73,10 @@ export default function AdminWorks() {
     <div className="admin-section">
       <div className="admin-header">
         <h1 className="admin-title">Works 管理</h1>
-        <button className="btn-primary" onClick={() => setMode('add')}>+ 追加</button>
+        <div style={{display:'flex',gap:'8px'}}>
+          <button className="btn-secondary" onClick={() => setMode('tweet')}>+ Tweet</button>
+          <button className="btn-primary" onClick={() => setMode('add')}>+ 追加</button>
+        </div>
       </div>
 
       {error && <p className="form-error">{error}</p>}

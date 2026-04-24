@@ -9,6 +9,7 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     title: initial?.title ?? '',
     description: initial?.description ?? '',
     thumbnail_url: initial?.thumbnail_url ?? '',
+    tweet_url: initial?.tweet_url ?? '',
     tags: (initial?.tags ?? []).join(', '),
     urls: (initial?.urls ?? []).join('\n'),
     published_at: initial?.published_at ?? new Date().toISOString().slice(0, 10),
@@ -54,6 +55,7 @@ export default function WorkForm({ initial, onSave, onCancel }) {
         title: form.title,
         description: form.description,
         thumbnail_url: thumbnailUrl,
+        tweet_url: form.tweet_url || null,
         tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
         urls: form.urls.split('\n').map(u => u.trim()).filter(Boolean),
         published_at: form.published_at || null,
@@ -118,6 +120,17 @@ export default function WorkForm({ initial, onSave, onCancel }) {
           placeholder="または URL を直接入力"
           value={form.thumbnail_url}
           onChange={e => { set('thumbnail_url', e.target.value); setThumbPreview(e.target.value) }}
+        />
+      </label>
+
+      <label className="form-label">
+        Tweet URL
+        <input
+          className="form-input"
+          type="url"
+          placeholder="https://x.com/user/status/..."
+          value={form.tweet_url}
+          onChange={e => set('tweet_url', e.target.value)}
         />
       </label>
 
