@@ -3,15 +3,23 @@ import { supabase } from '../lib/supabase'
 
 const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || 'portfolio-assets'
 
+function isTweetUrl(url) {
+  return /x\.com|twitter\.com/.test(url) && /\/status\/\d+/.test(url)
+}
+
+function isImageUrl(url) {
+  return /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(url)
+}
+
 export default function WorkForm({ initial, onSave, onCancel }) {
   const isEdit = !!initial?.id
   const [form, setForm] = useState({
     title: initial?.title ?? '',
     description: initial?.description ?? '',
     thumbnail_url: initial?.thumbnail_url ?? '',
-
+    tweet_url: initial?.tweet_url ?? '',
     tags: (initial?.tags ?? []).join(', '),
-    urls: (initial?.urls ?? [])[0] ?? '',
+    url: (initial?.urls ?? [])[0] ?? '',
     published_at: initial?.published_at ?? new Date().toISOString().slice(0, 10),
   })
   const [thumbFile, setThumbFile] = useState(null)
@@ -31,14 +39,27 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     setThumbPreview(URL.createObjectURL(file))
   }
 
-  async function fetchOgpThumbnail(url) {
-    if (!url || thumbFile || form.thumbnail_url) return
-    try {
-      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
-      const data = await res.json()
-      const img = data?.data?.image?.url || data?.data?.screenshot?.url
-      if (img) { set('thumbnail_url', img); setThumbPreview(img) }
-    } catch {}
+  async function handleUrlBlur(url) {
+    if (!url) return
+    if (isTweetUrl(url)) {
+      set('tweet_url', url)
+      set('url', '')
+      return
+    }
+    if (isImageUrl(url)) {
+      set('thumbnail_url', url)
+      setThumbPreview(url)
+      return
+    }
+    // ウェブサイト → microlinkでOGP取得
+    if (!thumbFile && !form.thumbnail_url) {
+      try {
+        const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
+        const data = await res.json()
+        const img = data?.data?.image?.url || data?.data?.screenshot?.url
+        if (img) { set('thumbnail_url', img); setThumbPreview(img) }
+      } catch {}
+    }
   }
 
   async function uploadThumbnail() {
@@ -65,9 +86,9 @@ export default function WorkForm({ initial, onSave, onCancel }) {
         title: form.title,
         description: form.description,
         thumbnail_url: thumbnailUrl,
-
+        tweet_url: form.tweet_url || null,
         tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-        urls: form.urls.trim() ? [form.urls.trim()] : [],
+        urls: form.url.trim() ? [form.url.trim()] : [],
         published_at: form.published_at || null,
       }
       let result
@@ -106,12 +127,24 @@ export default function WorkForm({ initial, onSave, onCancel }) {
           className="form-input form-textarea"
           value={form.description}
           onChange={e => set('description', e.target.value)}
-          rows={4}
+          rows={3}
         />
       </label>
 
       <label className="form-label">
-        サムネイル
+        URL（Twitter / 画像 / ウェブサイト）
+        <input
+          className="form-input"
+          type="url"
+          placeholder="https://..."
+          value={form.url || form.tweet_url}
+          onChange={e => { set('url', e.target.value); set('tweet_url', '') }}
+          onBlur={e => handleUrlBlur(e.target.value.trim())}
+        />
+      </label>
+
+      <label className="form-label">
+        サムネイル画像
         <div className="thumb-upload-area">
           {thumbPreview && (
             <img className="thumb-preview" src={thumbPreview} alt="thumbnail preview" />
@@ -124,13 +157,6 @@ export default function WorkForm({ initial, onSave, onCancel }) {
           />
           {uploading && <span className="form-hint">アップロード中...</span>}
         </div>
-        <input
-          className="form-input"
-          type="url"
-          placeholder="または URL を直接入力"
-          value={form.thumbnail_url}
-          onChange={e => { set('thumbnail_url', e.target.value); setThumbPreview(e.target.value) }}
-        />
       </label>
 
       <label className="form-label">
@@ -141,18 +167,6 @@ export default function WorkForm({ initial, onSave, onCancel }) {
           placeholder="React, Vite, Supabase"
           value={form.tags}
           onChange={e => set('tags', e.target.value)}
-        />
-      </label>
-
-      <label className="form-label">
-        リンク
-        <input
-          className="form-input"
-          type="url"
-          placeholder="https://github.com/..."
-          value={form.urls}
-          onChange={e => set('urls', e.target.value)}
-          onBlur={e => fetchOgpThumbnail(e.target.value.trim())}
         />
       </label>
 
