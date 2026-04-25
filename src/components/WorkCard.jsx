@@ -27,7 +27,7 @@ function TweetEmbed({ url }) {
       window.twttr?.widgets.createTweet(
         url.match(/status\/(\d+)/)?.[1],
         ref.current,
-        { theme: 'dark', dnt: true, conversation: 'none' }
+        { theme: 'light', dnt: true, conversation: 'none' }
       )
     }
     if (window.twttr) {
