@@ -11,7 +11,7 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     thumbnail_url: initial?.thumbnail_url ?? '',
     tweet_url: initial?.tweet_url ?? '',
     tags: (initial?.tags ?? []).join(', '),
-    urls: (initial?.urls ?? []).join('\n'),
+    urls: (initial?.urls ?? [])[0] ?? '',
     published_at: initial?.published_at ?? new Date().toISOString().slice(0, 10),
   })
   const [thumbFile, setThumbFile] = useState(null)
@@ -67,7 +67,7 @@ export default function WorkForm({ initial, onSave, onCancel }) {
         thumbnail_url: thumbnailUrl,
         tweet_url: form.tweet_url || null,
         tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-        urls: form.urls.split('\n').map(u => u.trim()).filter(Boolean),
+        urls: form.urls.trim() ? [form.urls.trim()] : [],
         published_at: form.published_at || null,
       }
       let result
@@ -156,17 +156,14 @@ export default function WorkForm({ initial, onSave, onCancel }) {
       </label>
 
       <label className="form-label">
-        URL（1行に1つ）
-        <textarea
-          className="form-input form-textarea"
+        URL
+        <input
+          className="form-input"
+          type="url"
           placeholder="https://github.com/..."
           value={form.urls}
           onChange={e => set('urls', e.target.value)}
-          onBlur={e => {
-            const firstUrl = e.target.value.split('\n').map(u => u.trim()).filter(Boolean)[0]
-            if (firstUrl) fetchOgpThumbnail(firstUrl)
-          }}
-          rows={3}
+          onBlur={e => fetchOgpThumbnail(e.target.value.trim())}
         />
       </label>
 
