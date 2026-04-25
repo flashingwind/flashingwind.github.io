@@ -133,7 +133,7 @@ export default function WorkForm({ initial, onSave, onCancel }) {
         URL（Twitter / 画像 / ウェブサイト）
         <input
           className="form-input"
-          type="url"
+          type="text"
           placeholder="https://..."
           value={form.url || form.tweet_url}
           onChange={e => { set('url', e.target.value); set('tweet_url', '') }}
