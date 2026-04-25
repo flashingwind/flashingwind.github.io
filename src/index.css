@@ -3,7 +3,9 @@
   --bg: #fff; --bg2: #f7f7f5; --text: #111; --muted: #888;
   --border: #e8e8e4; --card-bg: #fff; --tag-bg: #f0f0ec;
 }
-html { color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #fff; --bg2: #f7f7f5; --text: #111; --muted: #888; --border: #e8e8e4; --card-bg: #fff; --tag-bg: #f0f0ec; }
+}
 html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 15px; }
 
