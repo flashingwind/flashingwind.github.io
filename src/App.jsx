@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from './lib/supabase'
 import WorkCard from './components/WorkCard'
 
@@ -38,8 +39,12 @@ const CONTACT_LINKS = [
 
 export default function App() {
   const [works, setWorks] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
+    supabase.auth.onAuthStateChange((event) => {
+      if (event === 'SIGNED_IN') navigate('/admin', { replace: true })
+    })
     supabase
       .from('works')
       .select('*')

@@ -55,9 +55,11 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     try {
       const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
       const data = await res.json()
+      console.log('microlink response:', data)
       const img = data?.data?.image?.url || data?.data?.screenshot?.url
+      console.log('img url:', img)
       if (img) { set('thumbnail_url', img); setThumbPreview(img) }
-    } catch {}
+    } catch (err) { console.error('microlink error:', err) }
   }
 
   async function uploadThumbnail() {
