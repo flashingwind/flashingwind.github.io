@@ -100,6 +100,17 @@ async function main() {
     return
   }
 
+  // 既存レコードのpublished状態を取得
+  const { data: existing } = await supabase
+    .from('works')
+    .select('title, published')
+    .eq('source', 'google-photos')
+
+  const publishedMap = {}
+  for (const w of (existing || [])) {
+    publishedMap[w.title] = w.published
+  }
+
   // 既存の google-photos 由来の works を削除
   const { error: delError } = await supabase
     .from('works')
@@ -114,9 +125,11 @@ async function main() {
     const publishedAt = file.createdTime
       ? new Date(file.createdTime).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10)
+    const title = file.name.replace(/\.[^.]+$/, '')
+    const wasPublished = publishedMap[title] ?? false
 
     const { error } = await supabase.from('works').insert({
-      title: file.name.replace(/\.[^.]+$/, ''),
+      title,
       description,
       thumbnail_url: thumbnailUrl,
       original_url: thumbnailUrl,
@@ -124,7 +137,7 @@ async function main() {
       urls: [],
       published_at: publishedAt,
       source: 'google-photos',
-      published: false,
+      published: wasPublished,
     })
     if (error) throw error
     console.log(`登録完了: ${file.name}`)
