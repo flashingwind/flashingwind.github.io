@@ -53,11 +53,9 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     }
     // ウェブサイト → microlinkでOGP取得
     try {
-      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
+      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false`)
       const data = await res.json()
-      console.log('microlink response:', data)
-      const img = data?.data?.image?.url || data?.data?.screenshot?.url
-      console.log('img url:', img)
+      const img = data?.data?.screenshot?.url || data?.data?.image?.url
       if (img) { set('thumbnail_url', img); setThumbPreview(img) }
     } catch (err) { console.error('microlink error:', err) }
   }
