@@ -125,7 +125,7 @@ async function main() {
     const publishedAt = file.createdTime
       ? new Date(file.createdTime).toISOString().slice(0, 10)
       : new Date().toISOString().slice(0, 10)
-    const title = file.name.replace(/\.[^.]+$/, '')
+    const title = ''
     const wasPublished = publishedMap[title] ?? false
 
     const { error } = await supabase.from('works').insert({

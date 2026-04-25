@@ -63,7 +63,7 @@ function PhotoModal({ work, onClose }) {
 
 export default function WorkCard({ work }) {
   const { title, description, thumbnail_url, original_url, tags, published_at, urls, source, tweet_url } = work
-  const date = published_at ? published_at.slice(0, 7) : ''
+  const date = !tweet_url && published_at ? published_at.slice(0, 7) : ''
   const linkList = (urls || []).filter(Boolean)
   const isPhoto = source === 'google-photos'
   const [open, setOpen] = useState(false)
