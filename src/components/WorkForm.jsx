@@ -31,6 +31,16 @@ export default function WorkForm({ initial, onSave, onCancel }) {
     setThumbPreview(URL.createObjectURL(file))
   }
 
+  async function fetchOgpThumbnail(url) {
+    if (!url || thumbFile || form.thumbnail_url) return
+    try {
+      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
+      const data = await res.json()
+      const img = data?.data?.image?.url || data?.data?.screenshot?.url
+      if (img) { set('thumbnail_url', img); setThumbPreview(img) }
+    } catch {}
+  }
+
   async function uploadThumbnail() {
     if (!thumbFile) return form.thumbnail_url
     setUploading(true)
@@ -152,6 +162,10 @@ export default function WorkForm({ initial, onSave, onCancel }) {
           placeholder="https://github.com/..."
           value={form.urls}
           onChange={e => set('urls', e.target.value)}
+          onBlur={e => {
+            const firstUrl = e.target.value.split('\n').map(u => u.trim()).filter(Boolean)[0]
+            if (firstUrl) fetchOgpThumbnail(firstUrl)
+          }}
           rows={3}
         />
       </label>
