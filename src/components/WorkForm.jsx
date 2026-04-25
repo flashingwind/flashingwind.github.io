@@ -52,14 +52,12 @@ export default function WorkForm({ initial, onSave, onCancel }) {
       return
     }
     // ウェブサイト → microlinkでOGP取得
-    if (!thumbFile && !form.thumbnail_url) {
-      try {
-        const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
-        const data = await res.json()
-        const img = data?.data?.image?.url || data?.data?.screenshot?.url
-        if (img) { set('thumbnail_url', img); setThumbPreview(img) }
-      } catch {}
-    }
+    try {
+      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
+      const data = await res.json()
+      const img = data?.data?.image?.url || data?.data?.screenshot?.url
+      if (img) { set('thumbnail_url', img); setThumbPreview(img) }
+    } catch {}
   }
 
   async function uploadThumbnail() {
