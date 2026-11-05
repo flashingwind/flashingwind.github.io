@@ -47,7 +47,8 @@ export default function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) navigate('/admin', { replace: true })
     })
-    getDocs(collection(db, 'works')).then((snap) => {
+    getDocs(collection(db, 'works')).catch((err) => { console.error('Failed to load works:', err); return null }).then((snap) => {
+      if (!snap) return
       const all = snap.docs.map(d => ({ id: d.id, ...d.data() }))
       setWorks(all.filter(w => w.published).sort((a, b) => (b.published_at || '').localeCompare(a.published_at || '')))
     })
