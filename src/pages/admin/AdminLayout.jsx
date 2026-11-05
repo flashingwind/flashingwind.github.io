@@ -1,1 +1,40 @@
-aW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JwppbXBvcnQgeyBPdXRsZXQsIHVzZU5hdmlnYXRlLCBMaW5rIH0gZnJvbSAncmVhY3Qtcm91dGVyLWRvbScKaW1wb3J0IHsgYXV0aCB9IGZyb20gJy4uLy4uL2xpYi9maXJlYmFzZScKaW1wb3J0IHsgb25BdXRoU3RhdGVDaGFuZ2VkLCBzaWduT3V0IH0gZnJvbSAnZmlyZWJhc2UvYXV0aCcKCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEFkbWluTGF5b3V0KCkgewogIGNvbnN0IG5hdmlnYXRlID0gdXNlTmF2aWdhdGUoKQogIGNvbnN0IFtjaGVja2luZywgc2V0Q2hlY2tpbmddID0gdXNlU3RhdGUodHJ1ZSkKCiAgdXNlRWZmZWN0KCgpID0+IHsKICAgIGNvbnN0IHVuc3Vic2NyaWJlID0gb25BdXRoU3RhdGVDaGFuZ2VkKGF1dGgsICh1c2VyKSA9PiB7CiAgICAgIGlmICghdXNlcikgbmF2aWdhdGUoJy9sb2dpbicsIHsgcmVwbGFjZTogdHJ1ZSB9KQogICAgICBlbHNlIHNldENoZWNraW5nKGZhbHNlKQogICAgfSkKCiAgICByZXR1cm4gKCkgPT4gdW5zdWJzY3JpYmUoKQogIH0sIFtuYXZpZ2F0ZV0pCgogIGFzeW5jIGZ1bmN0aW9uIGhhbmRsZUxvZ291dCgpIHsKICAgIGF3YWl0IHNpZ25PdXQoYXV0aCkKICAgIG5hdmlnYXRlKCcvbG9naW4nLCB7IHJlcGxhY2U6IHRydWUgfSkKICB9CgogIGlmIChjaGVja2luZykgcmV0dXJuIDxkaXYgY2xhc3NOYW1lPSJhZG1pbi1sb2FkaW5nIj7oqo3oqLznorroqo3kuK0uLi48L2Rpdj4KCiAgcmV0dXJuICgKICAgIDxkaXYgY2xhc3NOYW1lPSJhZG1pbi13cmFwIj4KICAgICAgPG5hdiBjbGFzc05hbWU9ImFkbWluLW5hdiI+CiAgICAgICAgPExpbmsgdG89Ii8iIGNsYXNzTmFtZT0iYWRtaW4tbmF2LWxvZ28iPmZsYXNoaW5nd2luZDwvTGluaz4KICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iYWRtaW4tbmF2LWxpbmtzIj4KICAgICAgICAgIDxMaW5rIHRvPSIvYWRtaW4iPldvcmtzPC9MaW5rPgogICAgICAgIDwvZGl2PgogICAgICAgIDxidXR0b24gY2xhc3NOYW1lPSJidG4tbG9nb3V0IiBvbkNsaWNrPXtoYW5kbGVMb2dvdXR9PuODreOCsOOCouOCpuODiDwvYnV0dG9uPgogICAgICA8L25hdj4KICAgICAgPG1haW4gY2xhc3NOYW1lPSJhZG1pbi1tYWluIj4KICAgICAgICA8T3V0bGV0IC8+CiAgICAgIDwvbWFpbj4KICAgIDwvZGl2PgogICkKfQo=
+import { useEffect, useState } from 'react'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
+import { auth } from '../../lib/firebase'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+
+export default function AdminLayout() {
+  const navigate = useNavigate()
+  const [checking, setChecking] = useState(true)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) navigate('/login', { replace: true })
+      else setChecking(false)
+    })
+
+    return () => unsubscribe()
+  }, [navigate])
+
+  async function handleLogout() {
+    await signOut(auth)
+    navigate('/login', { replace: true })
+  }
+
+  if (checking) return <div className="admin-loading">認証確認中...</div>
+
+  return (
+    <div className="admin-wrap">
+      <nav className="admin-nav">
+        <Link to="/" className="admin-nav-logo">flashingwind</Link>
+        <div className="admin-nav-links">
+          <Link to="/admin">Works</Link>
+        </div>
+        <button className="btn-logout" onClick={handleLogout}>ログアウト</button>
+      </nav>
+      <main className="admin-main">
+        <Outlet />
+      </main>
+    </div>
+  )
+}
