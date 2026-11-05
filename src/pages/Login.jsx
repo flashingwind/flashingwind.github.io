@@ -1,1 +1,83 @@
-aW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JwppbXBvcnQgeyB1c2VOYXZpZ2F0ZSB9IGZyb20gJ3JlYWN0LXJvdXRlci1kb20nCmltcG9ydCB7IGF1dGggfSBmcm9tICcuLi9saWIvZmlyZWJhc2UnCmltcG9ydCB7IHNpZ25JbldpdGhFbWFpbEFuZFBhc3N3b3JkLCBzaWduSW5XaXRoUmVkaXJlY3QsIGdldFJlZGlyZWN0UmVzdWx0LCBHaXRodWJBdXRoUHJvdmlkZXIgfSBmcm9tICdmaXJlYmFzZS9hdXRoJwoKZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gTG9naW4oKSB7CiAgY29uc3QgbmF2aWdhdGUgPSB1c2VOYXZpZ2F0ZSgpCiAgY29uc3QgW2VtYWlsLCBzZXRFbWFpbF0gPSB1c2VTdGF0ZSgnJykKICBjb25zdCBbcGFzc3dvcmQsIHNldFBhc3N3b3JkXSA9IHVzZVN0YXRlKCcnKQogIGNvbnN0IFtsb2FkaW5nLCBzZXRMb2FkaW5nXSA9IHVzZVN0YXRlKGZhbHNlKQogIGNvbnN0IFtlcnJvciwgc2V0RXJyb3JdID0gdXNlU3RhdGUoJycpCgogIHVzZUVmZmVjdCgoKSA9PiB7CiAgICBnZXRSZWRpcmVjdFJlc3VsdChhdXRoKS5jYXRjaCgoZXJyKSA9PiBzZXRFcnJvcihlcnIubWVzc2FnZSkpCiAgfSwgW10pCgogIGFzeW5jIGZ1bmN0aW9uIGhhbmRsZUVtYWlsTG9naW4oZSkgewogICAgZS5wcmV2ZW50RGVmYXVsdCgpCiAgICBzZXRMb2FkaW5nKHRydWUpCiAgICBzZXRFcnJvcignJykKICAgIHRyeSB7CiAgICAgIGF3YWl0IHNpZ25JbldpdGhFbWFpbEFuZFBhc3N3b3JkKGF1dGgsIGVtYWlsLCBwYXNzd29yZCkKICAgICAgbmF2aWdhdGUoJy9hZG1pbicpCiAgICB9IGNhdGNoIChlcnIpIHsKICAgICAgc2V0RXJyb3IoZXJyLm1lc3NhZ2UpCiAgICB9IGZpbmFsbHkgewogICAgICBzZXRMb2FkaW5nKGZhbHNlKQogICAgfQogIH0KCiAgYXN5bmMgZnVuY3Rpb24gaGFuZGxlR2l0SHViTG9naW4oKSB7CiAgICBzZXRFcnJvcignJykKICAgIHRyeSB7CiAgICAgIGF3YWl0IHNpZ25JbldpdGhSZWRpcmVjdChhdXRoLCBuZXcgR2l0aHViQXV0aFByb3ZpZGVyKCkpCiAgICB9IGNhdGNoIChlcnIpIHsKICAgICAgc2V0RXJyb3IoZXJyLm1lc3NhZ2UpCiAgICB9CiAgfQoKICByZXR1cm4gKAogICAgPGRpdiBjbGFzc05hbWU9ImxvZ2luLXBhZ2UiPgogICAgICA8ZGl2IGNsYXNzTmFtZT0ibG9naW4tY2FyZCI+CiAgICAgICAgPGgxIGNsYXNzTmFtZT0ibG9naW4tdGl0bGUiPkFkbWluIExvZ2luPC9oMT4KCiAgICAgICAgPGJ1dHRvbiBjbGFzc05hbWU9ImJ0bi1naXRodWIiIG9uQ2xpY2s9e2hhbmRsZUdpdEh1YkxvZ2lufT4KICAgICAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJjdXJyZW50Q29sb3IiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCI+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0xMiAwQzUuMzcgMCAwIDUuMzcgMCAxMmMwIDUuMyAzLjQ0IDkuOCA4LjIxIDExLjM5LjYuMTEuODItLjI2LjgyLS41OHYtMi4wM2MtMy4zNC43My00LjA0LTEuNjEtNC4wNC0xLjYxLS41NS0xLjM5LTEuMzQtMS43Ni0xLjM0LTEuNzYtMS4wOS0uNzQuMDgtLjczLjA4LS43MyAxLjIuMDggMS44NCAxLjI0IDEuODQgMS4yNCAxLjA3IDEuODMgMi44MSAxLjMgMy41IDEgLjExLS43OC40Mi0xLjMuNzYtMS42LTIuNjctLjMtNS40Ny0xLjMzLTUuNDctNS45MyAwLTEuMzEuNDctMi4zOCAxLjI0LTMuMjItLjEyLS4zLS41NC0xLjUyLjEyLTMuMTggMCAwIDEuMDEtLjMyIDMuMyAxLjIzYTExLjUgMTEuNSAwIDAgMSAzLS40YzEuMDIgMCAyLjA0LjE0IDMgLjQgMi4yOS0xLjU1IDMuMy0xLjIzIDMuMy0xLjIzLjY2IDEuNjYuMjQgMi44OC4xMiAzLjE4Ljc3Ljg0IDEuMjQgMS45MSAxLjI0IDMuMjIgMCA0LjYxLTIuODEgNS42My01LjQ4IDUuOTIuNDMuMzcuODEgMS4xLjgxIDIuMjJ2My4yOWMwIC4zMi4yMS43LjgyLjU4QzIwLjU2IDIxLjggMjQgMTcuMyAyNCAxMmMwLTYuNjMtNS4zNy0xMi0xMi0xMnoiIC8+CiAgICAgICAgICA8L3N2Zz4KICAgICAgICAgIEdpdEh1YiDjgafjg63jgrDjgqTjg7MKICAgICAgICA8L2J1dHRvbj4KCiAgICAgICAgPGRpdiBjbGFzc05hbWU9ImxvZ2luLWRpdmlkZXIiPjxzcGFuPuOBvuOBn+OBrzwvc3Bhbj48L2Rpdj4KCiAgICAgICAgPGZvcm0gb25TdWJtaXQ9e2hhbmRsZUVtYWlsTG9naW59IGNsYXNzTmFtZT0ibG9naW4tZm9ybSI+CiAgICAgICAgICA8bGFiZWw+CiAgICAgICAgICAgIOODoeODvOODq+OCouODieODrOOCuQogICAgICAgICAgICA8aW5wdXQKICAgICAgICAgICAgICB0eXBlPSJlbWFpbCIKICAgICAgICAgICAgICB2YWx1ZT17ZW1haWx9CiAgICAgICAgICAgICAgb25DaGFuZ2U9e2UgPT4gc2V0RW1haWwoZS50YXJnZXQudmFsdWUpfQogICAgICAgICAgICAgIHJlcXVpcmVkCiAgICAgICAgICAgICAgYXV0b0NvbXBsZXRlPSJlbWFpbCIKICAgICAgICAgICAgLz4KICAgICAgICAgIDwvbGFiZWw+CiAgICAgICAgICA8bGFiZWw+CiAgICAgICAgICAgIOODkeOCueODr+ODvOODiQogICAgICAgICAgICA8aW5wdXQKICAgICAgICAgICAgICB0eXBlPSJwYXNzd29yZCIKICAgICAgICAgICAgICB2YWx1ZT17cGFzc3dvcmR9CiAgICAgICAgICAgICAgb25DaGFuZ2U9e2UgPT4gc2V0UGFzc3dvcmQoZS50YXJnZXQudmFsdWUpfQogICAgICAgICAgICAgIHJlcXVpcmVkCiAgICAgICAgICAgICAgYXV0b0NvbXBsZXRlPSJjdXJyZW50LXBhc3N3b3JkIgogICAgICAgICAgICAvPgogICAgICAgICAgPC9sYWJlbD4KICAgICAgICAgIHtlcnJvciAmJiA8cCBjbGFzc05hbWU9ImxvZ2luLWVycm9yIj57ZXJyb3J9PC9wPn0KICAgICAgICAgIDxidXR0b24gdHlwZT0ic3VibWl0IiBjbGFzc05hbWU9ImJ0bi1wcmltYXJ5IiBkaXNhYmxlZD17bG9hZGluZ30+CiAgICAgICAgICAgIHtsb2FkaW5nID8gJ+ODreOCsOOCpOODs+S4rS4uLicgOiAn44Ot44Kw44Kk44OzJ30KICAgICAgICAgIDwvYnV0dG9uPgogICAgICAgIDwvZm9ybT4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICApCn0K
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../lib/firebase'
+import { signInWithEmailAndPassword, signInWithRedirect, getRedirectResult, GithubAuthProvider } from 'firebase/auth'
+
+export default function Login() {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    getRedirectResult(auth).catch((err) => setError(err.message))
+  }, [])
+
+  async function handleEmailLogin(e) {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      navigate('/admin')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function handleGitHubLogin() {
+    setError('')
+    try {
+      await signInWithRedirect(auth, new GithubAuthProvider())
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  return (
+    <div className="login-page">
+      <div className="login-card">
+        <h1 className="login-title">Admin Login</h1>
+
+        <button className="btn-github" onClick={handleGitHubLogin}>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+          GitHub でログイン
+        </button>
+
+        <div className="login-divider"><span>または</span></div>
+
+        <form onSubmit={handleEmailLogin} className="login-form">
+          <label>
+            メールアドレス
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </label>
+          <label>
+            パスワード
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
+          </label>
+          {error && <p className="login-error">{error}</p>}
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? 'ログイン中...' : 'ログイン'}
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
