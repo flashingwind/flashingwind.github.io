@@ -20,7 +20,8 @@ export default function AdminWorks() {
       const all = snap.docs.map(d => ({ id: d.id, ...d.data() }))
       setWorks(all.sort((a, b) => (b.published_at || '').localeCompare(a.published_at || '')))
     } catch (err) {
-      setError(err.message)
+      console.error('Failed to fetch works:', err)
+      setError('作品の読み込みに失敗しました。')
     }
     setLoading(false)
   }
@@ -29,14 +30,14 @@ export default function AdminWorks() {
     if (!confirm('この作品を削除しますか？')) return
     try {
       await deleteDoc(doc(db, 'works', id))
-    } catch (err) { setError(err.message); return }
+    } catch (err) { console.error('Failed to delete work:', err); setError('削除に失敗しました。'); return }
     setWorks(ws => ws.filter(w => w.id !== id))
   }
 
   async function handleTogglePublish(w) {
     try {
       await updateDoc(doc(db, 'works', w.id), { published: !w.published })
-    } catch (err) { setError(err.message); return }
+    } catch (err) { console.error('Failed to update work:', err); setError('更新に失敗しました。'); return }
     setWorks(ws => ws.map(x => x.id === w.id ? { ...x, published: !w.published } : x))
   }
 
