@@ -72,7 +72,8 @@ export default function WorkForm({ initial, onSave, onCancel }) {
         onSave({ id: ref.id, ...payload })
       }
     } catch (err) {
-      setError(err.message)
+      console.error('Failed to save work:', err)
+      setError('保存に失敗しました。しばらく後に再度お試しください。')
     } finally {
       setSaving(false)
     }
