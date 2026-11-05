@@ -1,1 +1,164 @@
-aW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCcKaW1wb3J0IHsgZGIgfSBmcm9tICcuLi9saWIvZmlyZWJhc2UnCmltcG9ydCB7IGNvbGxlY3Rpb24sIGFkZERvYywgdXBkYXRlRG9jLCBkb2MgfSBmcm9tICdmaXJlYmFzZS9maXJlc3RvcmUnCgpmdW5jdGlvbiBpc1R3ZWV0VXJsKHVybCkgewogIHJldHVybiAveFwuY29tfHR3aXR0ZXJcLmNvbS8udGVzdCh1cmwpICYmIC9cL3N0YXR1c1wvXGQrLy50ZXN0KHVybCkKfQoKZnVuY3Rpb24gaXNJbWFnZVVybCh1cmwpIHsKICByZXR1cm4gL1wuKGpwZ3xqcGVnfHBuZ3xnaWZ8d2VicCkoXD8uKik/JC9pLnRlc3QodXJsKQp9CgpleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBXb3JrRm9ybSh7IGluaXRpYWwsIG9uU2F2ZSwgb25DYW5jZWwgfSkgewogIGNvbnN0IGlzRWRpdCA9ICEhaW5pdGlhbD8uaWQKICBjb25zdCBbZm9ybSwgc2V0Rm9ybV0gPSB1c2VTdGF0ZSh7CiAgICB0aXRsZTogaW5pdGlhbD8udGl0bGUgPz8gJycsCiAgICBkZXNjcmlwdGlvbjogaW5pdGlhbD8uZGVzY3JpcHRpb24gPz8gJycsCiAgICB0aHVtYm5haWxfdXJsOiBpbml0aWFsPy50aHVtYm5haWxfdXJsID8/ICcnLAogICAgdHdlZXRfdXJsOiBpbml0aWFsPy50d2VldF91cmwgPz8gJycsCiAgICB0YWdzOiAoaW5pdGlhbD8udGFncyA/PyBbXSkuam9pbignLCAnKSwKICAgIHVybDogKGluaXRpYWw/LnVybHMgPz8gW10pWzBdID8/ICcnLAogICAgcHVibGlzaGVkX2F0OiBpbml0aWFsPy5wdWJsaXNoZWRfYXQgPz8gbmV3IERhdGUoKS50b0lTT1N0cmluZygpLnNsaWNlKDAsIDEwKSwKICB9KQogIGNvbnN0IFtzYXZpbmcsIHNldFNhdmluZ10gPSB1c2VTdGF0ZShmYWxzZSkKICBjb25zdCBbZXJyb3IsIHNldEVycm9yXSA9IHVzZVN0YXRlKCcnKQoKICBmdW5jdGlvbiBzZXQoZmllbGQsIHZhbHVlKSB7CiAgICBzZXRGb3JtKGYgPT4gKHsgLi4uZiwgW2ZpZWxkXTogdmFsdWUgfSkpCiAgfQoKICBhc3luYyBmdW5jdGlvbiBoYW5kbGVVcmxCbHVyKHVybCkgewogICAgaWYgKCF1cmwpIHJldHVybgogICAgaWYgKGlzVHdlZXRVcmwodXJsKSkgewogICAgICBzZXQoJ3R3ZWV0X3VybCcsIHVybCkKICAgICAgc2V0KCd1cmwnLCAnJykKICAgICAgcmV0dXJuCiAgICB9CiAgICBpZiAoaXNJbWFnZVVybCh1cmwpKSB7CiAgICAgIHNldCgndGh1bWJuYWlsX3VybCcsIHVybCkKICAgICAgcmV0dXJuCiAgICB9CiAgICAvLyDjgqbjgqfjg5bjgrXjgqTjg4gg4oaSIG1pY3JvbGlua+OBp09HUOWPluW+lwogICAgdHJ5IHsKICAgICAgY29uc3QgcmVzID0gYXdhaXQgZmV0Y2goYGh0dHBzOi8vYXBpLm1pY3JvbGluay5pby8/dXJsPSR7ZW5jb2RlVVJJQ29tcG9uZW50KHVybCl9JnNjcmVlbnNob3Q9dHJ1ZSZtZXRhPWZhbHNlYCkKICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlcy5qc29uKCkKICAgICAgY29uc3QgaW1nID0gZGF0YT8uZGF0YT8uc2NyZWVuc2hvdD8udXJsIHx8IGRhdGE/LmRhdGE/LmltYWdlPy51cmwKICAgICAgaWYgKGltZykgeyBzZXQoJ3RodW1ibmFpbF91cmwnLCBpbWcpIH0KICAgIH0gY2F0Y2ggKGVycikgeyBjb25zb2xlLmVycm9yKCdtaWNyb2xpbmsgZXJyb3I6JywgZXJyKSB9CiAgfQoKICBhc3luYyBmdW5jdGlvbiBoYW5kbGVTdWJtaXQoZSkgewogICAgZS5wcmV2ZW50RGVmYXVsdCgpCiAgICBzZXRTYXZpbmcodHJ1ZSkKICAgIHNldEVycm9yKCcnKQogICAgdHJ5IHsKICAgICAgY29uc3QgdGh1bWJuYWlsVXJsID0gZm9ybS50aHVtYm5haWxfdXJsCiAgICAgIGNvbnN0IHBheWxvYWQgPSB7CiAgICAgICAgdGl0bGU6IGZvcm0udGl0bGUsCiAgICAgICAgZGVzY3JpcHRpb246IGZvcm0uZGVzY3JpcHRpb24sCiAgICAgICAgdGh1bWJuYWlsX3VybDogdGh1bWJuYWlsVXJsLAogICAgICAgIHR3ZWV0X3VybDogZm9ybS50d2VldF91cmwgfHwgbnVsbCwKICAgICAgICB0YWdzOiBmb3JtLnRhZ3Muc3BsaXQoJywnKS5tYXAodCA9PiB0LnRyaW0oKSkuZmlsdGVyKEJvb2xlYW4pLAogICAgICAgIHVybHM6IGZvcm0udXJsLnRyaW0oKSA/IFtmb3JtLnVybC50cmltKCldIDogW10sCiAgICAgICAgcHVibGlzaGVkX2F0OiBmb3JtLnB1Ymxpc2hlZF9hdCB8fCBudWxsLAogICAgICAgIHB1Ymxpc2hlZDogaW5pdGlhbD8ucHVibGlzaGVkID8/IHRydWUsCiAgICAgIH0KICAgICAgaWYgKGlzRWRpdCkgewogICAgICAgIGF3YWl0IHVwZGF0ZURvYyhkb2MoZGIsICd3b3JrcycsIGluaXRpYWwuaWQpLCBwYXlsb2FkKQogICAgICAgIG9uU2F2ZSh7IC4uLmluaXRpYWwsIC4uLnBheWxvYWQsIGlkOiBpbml0aWFsLmlkIH0pCiAgICAgIH0gZWxzZSB7CiAgICAgICAgY29uc3QgcmVmID0gYXdhaXQgYWRkRG9jKGNvbGxlY3Rpb24oZGIsICd3b3JrcycpLCBwYXlsb2FkKQogICAgICAgIG9uU2F2ZSh7IGlkOiByZWYuaWQsIC4uLnBheWxvYWQgfSkKICAgICAgfQogICAgfSBjYXRjaCAoZXJyKSB7CiAgICAgIHNldEVycm9yKGVyci5tZXNzYWdlKQogICAgfSBmaW5hbGx5IHsKICAgICAgc2V0U2F2aW5nKGZhbHNlKQogICAgfQogIH0KCiAgcmV0dXJuICgKICAgIDxmb3JtIGNsYXNzTmFtZT0id29yay1mb3JtIiBvblN1Ym1pdD17aGFuZGxlU3VibWl0fT4KICAgICAgPGgyIGNsYXNzTmFtZT0iZm9ybS10aXRsZSI+e2lzRWRpdCA/ICfkvZzlk4HjgpLnt6jpm4YnIDogJ+S9nOWTgeOCkui/veWKoCd9PC9oMj4KCiAgICAgIDxsYWJlbCBjbGFzc05hbWU9ImZvcm0tbGFiZWwiPgogICAgICAgIOOCv+OCpOODiOODqyA8c3BhbiBjbGFzc05hbWU9InJlcXVpcmVkIj4qPC9zcGFuPgogICAgICAgIDxpbnB1dAogICAgICAgICAgY2xhc3NOYW1lPSJmb3JtLWlucHV0IgogICAgICAgICAgdHlwZT0idGV4dCIKICAgICAgICAgIHZhbHVlPXtmb3JtLnRpdGxlfQogICAgICAgICAgb25DaGFuZ2U9e2UgPT4gc2V0KCd0aXRsZScsIGUudGFyZ2V0LnZhbHVlKX0KICAgICAgICAgIHJlcXVpcmVkCiAgICAgICAgLz4KICAgICAgPC9sYWJlbD4KCiAgICAgIDxsYWJlbCBjbGFzc05hbWU9ImZvcm0tbGFiZWwiPgogICAgICAgIOiqrOaYjgogICAgICAgIDx0ZXh0YXJlYQogICAgICAgICAgY2xhc3NOYW1lPSJmb3JtLWlucHV0IGZvcm0tdGV4dGFyZWEiCiAgICAgICAgICB2YWx1ZT17Zm9ybS5kZXNjcmlwdGlvbn0KICAgICAgICAgIG9uQ2hhbmdlPXtlID0+IHNldCgnZGVzY3JpcHRpb24nLCBlLnRhcmdldC52YWx1ZSl9CiAgICAgICAgICByb3dzPXszfQogICAgICAgIC8+CiAgICAgIDwvbGFiZWw+CgogICAgICA8bGFiZWwgY2xhc3NOYW1lPSJmb3JtLWxhYmVsIj4KICAgICAgICBVUkzvvIhUd2l0dGVyIC8g55S75YOPIC8g44Km44Kn44OW44K144Kk44OI77yJCiAgICAgICAgPGlucHV0CiAgICAgICAgICBjbGFzc05hbWU9ImZvcm0taW5wdXQiCiAgICAgICAgICB0eXBlPSJ0ZXh0IgogICAgICAgICAgcGxhY2Vob2xkZXI9Imh0dHBzOi8vLi4uIgogICAgICAgICAgdmFsdWU9e2Zvcm0udXJsIHx8IGZvcm0udHdlZXRfdXJsfQogICAgICAgICAgb25DaGFuZ2U9e2UgPT4geyBzZXQoJ3VybCcsIGUudGFyZ2V0LnZhbHVlKTsgc2V0KCd0d2VldF91cmwnLCAnJykgfX0KICAgICAgICAgIG9uQmx1cj17ZSA9PiBoYW5kbGVVcmxCbHVyKGUudGFyZ2V0LnZhbHVlLnRyaW0oKSl9CiAgICAgICAgLz4KICAgICAgPC9sYWJlbD4KCiAgICAgIDxsYWJlbCBjbGFzc05hbWU9ImZvcm0tbGFiZWwiPgogICAgICAgIOOCteODoOODjeOCpOODq+eUu+WDj1VSTAogICAgICAgIDxpbnB1dAogICAgICAgICAgY2xhc3NOYW1lPSJmb3JtLWlucHV0IgogICAgICAgICAgdHlwZT0idGV4dCIKICAgICAgICAgIHBsYWNlaG9sZGVyPSIvaW1hZ2VzL2V4YW1wbGUuanBnIOOBvuOBn+OBryBodHRwczovLy4uLiIKICAgICAgICAgIHZhbHVlPXtmb3JtLnRodW1ibmFpbF91cmx9CiAgICAgICAgICBvbkNoYW5nZT17ZSA9PiBzZXQoJ3RodW1ibmFpbF91cmwnLCBlLnRhcmdldC52YWx1ZSl9CiAgICAgICAgLz4KICAgICAgICB7Zm9ybS50aHVtYm5haWxfdXJsICYmICgKICAgICAgICAgIDxpbWcgY2xhc3NOYW1lPSJ0aHVtYi1wcmV2aWV3IiBzcmM9e2Zvcm0udGh1bWJuYWlsX3VybH0gYWx0PSJ0aHVtYm5haWwgcHJldmlldyIgLz4KICAgICAgICApfQogICAgICAgIDxzcGFuIGNsYXNzTmFtZT0iZm9ybS1oaW50Ij7nlLvlg4/jg5XjgqHjgqTjg6vjga/jg6rjg53jgrjjg4jjg6rjga4gcHVibGljLyDku6XkuIvjgavnva7jgYTjgabjgIHjgZ3jga7jg5HjgrnjgpLmjIflrprjgZfjgabjgY/jgaDjgZXjgYQ8L3NwYW4+CiAgICAgIDwvbGFiZWw+CgogICAgICA8bGFiZWwgY2xhc3NOYW1lPSJmb3JtLWxhYmVsIj4KICAgICAgICDjgr/jgrDvvIjjgqvjg7Pjg57ljLrliIfjgorvvIkKICAgICAgICA8aW5wdXQKICAgICAgICAgIGNsYXNzTmFtZT0iZm9ybS1pbnB1dCIKICAgICAgICAgIHR5cGU9InRleHQiCiAgICAgICAgICBwbGFjZWhvbGRlcj0iUmVhY3QsIFZpdGUsIFN1cGFiYXNlIgogICAgICAgICAgdmFsdWU9e2Zvcm0udGFnc30KICAgICAgICAgIG9uQ2hhbmdlPXtlID0+IHNldCgndGFncycsIGUudGFyZ2V0LnZhbHVlKX0KICAgICAgICAvPgogICAgICA8L2xhYmVsPgoKICAgICAgPGxhYmVsIGNsYXNzTmFtZT0iZm9ybS1sYWJlbCI+CiAgICAgICAg5YWs6ZaL5pelCiAgICAgICAgPGlucHV0CiAgICAgICAgICBjbGFzc05hbWU9ImZvcm0taW5wdXQiCiAgICAgICAgICB0eXBlPSJkYXRlIgogICAgICAgICAgdmFsdWU9e2Zvcm0ucHVibGlzaGVkX2F0fQogICAgICAgICAgb25DaGFuZ2U9e2UgPT4gc2V0KCdwdWJsaXNoZWRfYXQnLCBlLnRhcmdldC52YWx1ZSl9CiAgICAgICAgLz4KICAgICAgPC9sYWJlbD4KCiAgICAgIHtlcnJvciAmJiA8cCBjbGFzc05hbWU9ImZvcm0tZXJyb3IiPntlcnJvcn08L3A+fQoKICAgICAgPGRpdiBjbGFzc05hbWU9ImZvcm0tYWN0aW9ucyI+CiAgICAgICAgPGJ1dHRvbiB0eXBlPSJidXR0b24iIGNsYXNzTmFtZT0iYnRuLXNlY29uZGFyeSIgb25DbGljaz17b25DYW5jZWx9PuOCreODo+ODs+OCu+ODqzwvYnV0dG9uPgogICAgICAgIDxidXR0b24gdHlwZT0ic3VibWl0IiBjbGFzc05hbWU9ImJ0bi1wcmltYXJ5IiBkaXNhYmxlZD17c2F2aW5nfT4KICAgICAgICAgIHtzYXZpbmcgPyAn5L+d5a2Y5LitLi4uJyA6IGlzRWRpdCA/ICfmm7TmlrAnIDogJ+i/veWKoCd9CiAgICAgICAgPC9idXR0b24+CiAgICAgIDwvZGl2PgogICAgPC9mb3JtPgogICkKfQo=
+import { useState } from 'react'
+import { db } from '../lib/firebase'
+import { collection, addDoc, updateDoc, doc } from 'firebase/firestore'
+
+function isTweetUrl(url) {
+  return /x\.com|twitter\.com/.test(url) && /\/status\/\d+/.test(url)
+}
+
+function isImageUrl(url) {
+  return /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(url)
+}
+
+export default function WorkForm({ initial, onSave, onCancel }) {
+  const isEdit = !!initial?.id
+  const [form, setForm] = useState({
+    title: initial?.title ?? '',
+    description: initial?.description ?? '',
+    thumbnail_url: initial?.thumbnail_url ?? '',
+    tweet_url: initial?.tweet_url ?? '',
+    tags: (initial?.tags ?? []).join(', '),
+    url: (initial?.urls ?? [])[0] ?? '',
+    published_at: initial?.published_at ?? new Date().toISOString().slice(0, 10),
+  })
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  function set(field, value) {
+    setForm(f => ({ ...f, [field]: value }))
+  }
+
+  async function handleUrlBlur(url) {
+    if (!url) return
+    if (isTweetUrl(url)) {
+      set('tweet_url', url)
+      set('url', '')
+      return
+    }
+    if (isImageUrl(url)) {
+      set('thumbnail_url', url)
+      return
+    }
+    // ウェブサイト → microlinkでOGP取得
+    try {
+      const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false`)
+      const data = await res.json()
+      const img = data?.data?.screenshot?.url || data?.data?.image?.url
+      if (img) { set('thumbnail_url', img) }
+    } catch (err) { console.error('microlink error:', err) }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setSaving(true)
+    setError('')
+    try {
+      const thumbnailUrl = form.thumbnail_url
+      const payload = {
+        title: form.title,
+        description: form.description,
+        thumbnail_url: thumbnailUrl,
+        tweet_url: form.tweet_url || null,
+        tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+        urls: form.url.trim() ? [form.url.trim()] : [],
+        published_at: form.published_at || null,
+        published: initial?.published ?? true,
+      }
+      if (isEdit) {
+        await updateDoc(doc(db, 'works', initial.id), payload)
+        onSave({ ...initial, ...payload, id: initial.id })
+      } else {
+        const ref = await addDoc(collection(db, 'works'), payload)
+        onSave({ id: ref.id, ...payload })
+      }
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <form className="work-form" onSubmit={handleSubmit}>
+      <h2 className="form-title">{isEdit ? '作品を編集' : '作品を追加'}</h2>
+
+      <label className="form-label">
+        タイトル <span className="required">*</span>
+        <input
+          className="form-input"
+          type="text"
+          value={form.title}
+          onChange={e => set('title', e.target.value)}
+          required
+        />
+      </label>
+
+      <label className="form-label">
+        説明
+        <textarea
+          className="form-input form-textarea"
+          value={form.description}
+          onChange={e => set('description', e.target.value)}
+          rows={3}
+        />
+      </label>
+
+      <label className="form-label">
+        URL（Twitter / 画像 / ウェブサイト）
+        <input
+          className="form-input"
+          type="text"
+          placeholder="https://..."
+          value={form.url || form.tweet_url}
+          onChange={e => { set('url', e.target.value); set('tweet_url', '') }}
+          onBlur={e => handleUrlBlur(e.target.value.trim())}
+        />
+      </label>
+
+      <label className="form-label">
+        サムネイル画像URL
+        <input
+          className="form-input"
+          type="text"
+          placeholder="/images/example.jpg または https://..."
+          value={form.thumbnail_url}
+          onChange={e => set('thumbnail_url', e.target.value)}
+        />
+        {form.thumbnail_url && (
+          <img className="thumb-preview" src={form.thumbnail_url} alt="thumbnail preview" />
+        )}
+        <span className="form-hint">画像ファイルはリポジトリの public/ 以下に置いて、そのパスを指定してください</span>
+      </label>
+
+      <label className="form-label">
+        タグ（カンマ区切り）
+        <input
+          className="form-input"
+          type="text"
+          placeholder="React, Vite, Supabase"
+          value={form.tags}
+          onChange={e => set('tags', e.target.value)}
+        />
+      </label>
+
+      <label className="form-label">
+        公開日
+        <input
+          className="form-input"
+          type="date"
+          value={form.published_at}
+          onChange={e => set('published_at', e.target.value)}
+        />
+      </label>
+
+      {error && <p className="form-error">{error}</p>}
+
+      <div className="form-actions">
+        <button type="button" className="btn-secondary" onClick={onCancel}>キャンセル</button>
+        <button type="submit" className="btn-primary" disabled={saving}>
+          {saving ? '保存中...' : isEdit ? '更新' : '追加'}
+        </button>
+      </div>
+    </form>
+  )
+}
