@@ -11,7 +11,10 @@ export default function Login() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    getRedirectResult(auth).catch((err) => setError(err.message))
+    getRedirectResult(auth).catch((err) => {
+      console.error('GitHub login redirect error:', err)
+      setError('GitHub ログインに失敗しました。しばらく後に再度お試しください。')
+    })
   }, [])
 
   async function handleEmailLogin(e) {
@@ -22,7 +25,8 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password)
       navigate('/admin')
     } catch (err) {
-      setError(err.message)
+      console.error('Login error:', err)
+      setError('メールアドレスまたはパスワードが正しくありません')
     } finally {
       setLoading(false)
     }
@@ -33,7 +37,8 @@ export default function Login() {
     try {
       await signInWithRedirect(auth, new GithubAuthProvider())
     } catch (err) {
-      setError(err.message)
+      console.error('GitHub login error:', err)
+      setError('GitHub ログインに失敗しました。しばらく後に再度お試しください。')
     }
   }
 
