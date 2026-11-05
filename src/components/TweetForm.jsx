@@ -29,7 +29,8 @@ export default function TweetForm({ onSave, onCancel }) {
       const ref = await addDoc(collection(db, 'works'), payload)
       onSave({ id: ref.id, ...payload })
     } catch (err) {
-      setError(err.message)
+      console.error('Failed to save work:', err)
+      setError('保存に失敗しました。しばらく後に再度お試しください。')
     } finally {
       setSaving(false)
     }
